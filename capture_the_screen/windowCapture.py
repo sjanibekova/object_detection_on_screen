@@ -5,6 +5,8 @@ from ctypes import windll
 from PIL import Image
 import time
 import ctypes
+import pyautogui
+from pywinauto import Desktop
 
 
 # used for test
@@ -22,7 +24,7 @@ class WindowCapture:
 
     # constructor
     def __init__(self, window_name=None):
-
+        self.window_name = window_name
         if window_name is None:
             self.hwnd = win32gui.GetDesktopWindow()
         else:
@@ -73,6 +75,12 @@ class WindowCapture:
             im.save("test.png")
         return im
 
+
+
+    def get_element_tree(self):
+        d = Desktop(backend='uia')
+        print(d[self.window_name].print_control_identifiers())
+
     # find the name of the window you're interested in.
     # once you have it, update window_capture()
     # https://stackoverflow.com/questions/55547940/how-to-get-a-list-of-the-name-of-every-open-window
@@ -82,6 +90,9 @@ class WindowCapture:
             if win32gui.IsWindowVisible(hwnd):
                 print(hex(hwnd), win32gui.GetWindowText(hwnd))
         win32gui.EnumWindows(winEnumHandler, None)
+
+
+
 
     # translate a pixel position on a screenshot image to a pixel position on the screen.
     # pos = (x, y)

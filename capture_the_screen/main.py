@@ -13,12 +13,14 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 # initialize the WindowCapture class
 wincap = WindowCapture('Calculator')
 print(WindowCapture.list_window_names())
+print(wincap.get_element_tree())
 
 loop_time = time()
 while(True):
 
     # get an updated image of the game
     screenshot = wincap.get_screenshot()
+
 
     cv.imshow('Computer Vision', np.array(screenshot))
 
