@@ -92,7 +92,8 @@ class WindowCapture:
         win32gui.EnumWindows(winEnumHandler, None)
 
 
-
+    def get_mouse_position(self):
+        pyautogui.displayMousePosition()
 
     # translate a pixel position on a screenshot image to a pixel position on the screen.
     # pos = (x, y)
